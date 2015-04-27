@@ -9,9 +9,9 @@
 
 // Displays voluntary employees in table.
 $server = "localhost";
-$dB = "avalles";
-$user = "avalles";
-$password = "avalles@";
+$dB = "cauce";
+$user = "eramos";
+$password = "eramos";
 $coneccion = new mysqli($server, $user, $password, $dB);
 if ($coneccion->connect_errno) {
     echo "Failed to connect to MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;

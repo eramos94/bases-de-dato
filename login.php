@@ -8,9 +8,9 @@ if(isset($_POST['username'], $_POST['password'])) //verify we've got what we nee
 
 
 $server = "localhost";
-$dB = "avalles";
-$user = "avalles";
-$password = "avalles@";
+$dB = "cauce";
+$user = "eramos";
+$password = "eramos";
 
 	/*********database_credentials.php**************/
 	$mysqli = new mysqli($server, $user, $password, $dB);; //change to suit your database
