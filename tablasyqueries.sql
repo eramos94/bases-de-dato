@@ -3,7 +3,6 @@ CREATE TABLE voluntario
 	direccion VARCHAR(100), telefono VARCHAR(20),
 	sexo_vol CHAR(5), PRIMARY KEY (nombre_vol, email), UNIQUE (email) ) ENGINE = InnoDB;
 
-
 CREATE TABLE trabajo ( semestre VARCHAR(20), rol VARCHAR(100), 
 	email VARCHAR(100), PRIMARY KEY (semestre, rol, email), 
 	FOREIGN KEY (email) REFERENCES voluntario(email) ) ENGINE = InnoDB;
@@ -62,3 +61,21 @@ INSERT INTO matriculados (id_estudiante, class_id) VALUES
 	('2', '2'),
 	('2', '1'),
 	('3', '4');
+
+#--------------------------------------------------------------------------
+# Displaying Courses:
+
+SELECT c.nombre_clase, c.horario, c.semestre, c.email, c.seccion, c.class_id
+	FROM clases c, trabajo t, voluntario v 
+	WHERE c.email = v.email AND c.semestre = t.semestre
+	AND v.email = t.email ORDER BY c.class_id;
+
+#--------------------------------------------------------------------------
+# Displaying Voluntary Staff:
+
+SELECT * FROM voluntario;
+
+#--------------------------------------------------------------------------
+# Displaying Students:
+
+SELECT * FROM estudiante;
