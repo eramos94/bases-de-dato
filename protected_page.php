@@ -4,7 +4,7 @@ require_once("checklogin.php");
 ?>
 <html>
 <head>
-<title>Sample Page</title>
+<title>Menu Principal</title>
 </head>
 
 <body>
