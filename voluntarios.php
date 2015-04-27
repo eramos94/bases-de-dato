@@ -1,10 +1,15 @@
 <html>
-<style type="text/css">
-    #header { width:100%; background-color:#CCCCCC; text-align:center;}
-    #layouttable{border:0px;width:100%; text-align:center;}
-    #layouttable td.col1{width:20%;vertical-align:top;}
-</style>
+<head>
+<title>Voluntarios</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+</head>
+
 <body>
+<div class="container">
 <?php
 
 // Displays voluntary employees in table.
@@ -17,11 +22,11 @@ if ($coneccion->connect_errno) {
     echo "Failed to connect to MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
 }
 
-print "<font size = '5'> Lista de Estudiantes: </font>";
+print "<font size = '5'> Voluntarios: </font>";
 print "<br/>";
 print "<br/>";
 
-print "<table border = 10>";
+print "<table border = 10> <div class='container'>";
 $query = "SELECT * FROM voluntario";
 
 	if ($stmt = $coneccion->prepare($query) ) {
@@ -47,7 +52,9 @@ print "</table>";
 
 $coneccion ->close();
 ?>
+</div>
 <br/>
 <h3><a href="protected_page.php">Menu Principal</a></h3>
+</div>
 </body>
 </html>
