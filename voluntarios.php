@@ -26,7 +26,7 @@ if ($coneccion->connect_errno) {
     echo "Failed to connect to MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
 }
 
-print "<font size = '5'> Lista de Estudiantes: </font>";
+print "<font size = '5'> Lista de Voluntarios: </font>";
 print "<br/>";
 
 print "<div class = 'table-scroll'>";

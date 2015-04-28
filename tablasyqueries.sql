@@ -3,16 +3,13 @@ CREATE TABLE voluntario
 	direccion_vol VARCHAR(100), telefono_vol VARCHAR(20),
 	sexo_vol CHAR(5), PRIMARY KEY (id_vol), UNIQUE (email) ) ENGINE = InnoDB;
 
-CREATE TABLE trabajo ( semestre VARCHAR(20), rol VARCHAR(100), 
-	id_vol INT, PRIMARY KEY (semestre, rol, id_vol), 
-	FOREIGN KEY (id_vol) REFERENCES voluntario(id_vol) ) ENGINE = InnoDB;
+CREATE TABLE trabajo ( semestre VARCHAR(20), id_rol INT, 
+	id_vol INT, PRIMARY KEY (semestre, id_rol, id_vol), 
+	FOREIGN KEY (id_vol) REFERENCES notutor(id_vol) ) ENGINE = InnoDB;
 
 CREATE TABLE clases 
-	(nombre_clase VARCHAR(64), horario VARCHAR(25),
-	semestre VARCHAR(20), id_vol INT,
-	seccion VARCHAR(5), class_id INT NOT NULL AUTO_INCREMENT, UNIQUE (nombre_clase, seccion, semestre),
-	FOREIGN KEY (semestre) REFERENCES trabajo(semestre),
-	FOREIGN KEY (id_vol) REFERENCES voluntario(id_vol), PRIMARY KEY (class_id, nombre_clase) ) ENGINE = InnoDB;
+	(nombre_clase VARCHAR(64), class_id INT NOT NULL AUTO_INCREMENT,
+	UNIQUE (nombre_clase, class_id), PRIMARY KEY (class_id) ) ENGINE = InnoDB;
 
 CREATE TABLE estudiante
 	(id_estudiante INT NOT NULL AUTO_INCREMENT, nombre_estudiante VARCHAR(100),
@@ -20,10 +17,33 @@ CREATE TABLE estudiante
 	PRIMARY KEY (id_estudiante) ) ENGINE = InnoDB;
 
 CREATE TABLE matriculados
-	(id_estudiante INT, class_id INT,
-	PRIMARY KEY (id_estudiante, class_id),
+	(id_estudiante INT, ofrece_id INT,
+	PRIMARY KEY (id_estudiante, ofrece_id),
 	FOREIGN KEY (id_estudiante) REFERENCES estudiante(id_estudiante),
-	FOREIGN KEY (class_id) REFERENCES clases(class_id) ) ENGINE = InnoDB;
+	FOREIGN KEY (ofrece_id) REFERENCES ofrece(ofrece_id) ) ENGINE = InnoDB;
+
+CREATE TABLE roles
+	(id_rol INT NOT NULL AUTO_INCREMENT, nombre_rol VARCHAR(100),
+	PRIMARY KEY (id_rol) UNIQUE (nombre_rol) ) ENGINE = InnoDB;
+
+CREATE TABLE tutor
+	(id_vol INT REFERENCES voluntario(id_vol), PRIMARY KEY (id_vol));
+
+CREATE TABLE notutor
+	(id_vol INT REFERENCES voluntario(id_vol), PRIMARY KEY (id_vol));
+
+CREATE TABLE ofrece
+	(ofrece_id INT NOT NULL AUTO_INCREMENT, id_vol INT, class_id INT, 
+	UNIQUE (id_vol, class_id),
+	PRIMARY KEY (ofrece_id),
+	FOREIGN KEY (id_vol) REFERENCES tutor(id_vol),
+	FOREIGN KEY (class_id) REFERENCES clases (class_id) ) ENGINE = InnoDB;
+
+CREATE TABLE secciones
+	(seccion_id INT NOT NULL AUTO_INCREMENT, class_id INT REFERENCES clases(class_id), 
+	seccion CHAR(3), semestre CHAR(3),
+	horario VARCHAR(10),
+	UNIQUE (class_id, seccion, semestre), PRIMARY KEY (seccion_id) ) ENGINE = InnoDB;
 
 CREATE TABLE credenciales 
 	(username VARCHAR(100), password VARCHAR(100),
