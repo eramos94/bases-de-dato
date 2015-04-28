@@ -1,8 +1,5 @@
 <?php
-//function.php
-/**
- *generate_key
- *
+/*
  *generates a random key
  *
  *return (string) random string of 64 characters 

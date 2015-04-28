@@ -1,11 +1,20 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 <style type="text/css">
-    #header { width:100%; background-color:#CCCCCC; text-align:center;}
-    #layouttable{border:0px;width:100%; text-align:center;}
-    #layouttable td.col1{width:20%;vertical-align:top;}
+    .table-scroll{
+    	margin: 20px;
+    }
 </style>
 <body>
 <?php
+require_once("checklogin.php");
+
 
 // Displays voluntary employees in table.
 $server = "localhost";
@@ -19,35 +28,41 @@ if ($coneccion->connect_errno) {
 
 print "<font size = '5'> Lista de Estudiantes: </font>";
 print "<br/>";
-print "<br/>";
 
-print "<table border = 10>";
-$query = "SELECT * FROM voluntario";
+print "<div class = 'table-scroll'>";
+    print "<div class = 'table-responsive'>"; 
+        print "<table class='table table-bordered'>";
+		$query = "SELECT * FROM voluntario";
 
-	if ($stmt = $coneccion->prepare($query) ) {
-	$stmt -> execute();
-	$stmt -> bind_result($nombre_vol, $email, $direccion, $telefono, $sexo_vol);
+		if ($stmt = $coneccion->prepare($query) ) {
+		$stmt -> execute();
+		$stmt -> bind_result($id_vol, $nombre_vol, $email, $direccion, $telefono, $sexo_vol);
 
-	$columnas = array("Nombre del Voluntario", "Email", "Direccion", "Telefono", "Sexo");
-	for ($i = 0; $i < 5; $i++) {
-		print"<th>";
-		print $columnas[$i];
-		print"</th>";
-	}
-	while( $stmt -> fetch() ) {
-		print"<tr>";
-		printf("<td> %s </td> <td> %s </td> <td> %s </td> <td> %s </td> <td> %s </td> \n", 
-			  $nombre_vol, $email, $direccion, $telefono, $sexo_vol);
-		print"</tr>";
-	}
-	$stmt->close();
-}
+		$columnas = array("ID del Voluntario", "Nombre del Voluntario", "Email", "Direccion", "Telefono", "Sexo");
+		print "<thead>";
+		for ($i = 0; $i < 6; $i++) {
+			print"<th>";
+			print $columnas[$i];
+			print"</th>";
+		}
+		print "</thead>";
+		print "<tbody>";
+		while( $stmt -> fetch() ) {
+			print"<tr>";
+			printf("<td> %s </td> <td> %s </td> <td> %s </td> <td> %s </td> <td> %s </td> <td> %s </td> \n", 
+			 	 $id_vol, $nombre_vol, $email, $direccion, $telefono, $sexo_vol);
+			print"</tr>";
+		}
+		print "</tbody>";
+		$stmt->close();
+		}
 
-print "</table>";
+		print "</table>";
+    print "</div>";
+print "</div>";
 
 $coneccion ->close();
 ?>
-<br/>
-<h3><a href="protected_page.php">Menu Principal</a></h3>
+<h3><a href="menuprincipal.php">Menu Principal</a></h3>
 </body>
 </html>
