@@ -1,11 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Cursos</title>
+
+
+<!-- Bootstrap Core CSS -->
+<link href="css/bootstrap.min.css" rel="stylesheet">
+
+
 <style type="text/css">
     .table-scroll{
     	margin: 20px;
@@ -34,22 +43,22 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li>
-                        <a href="cursos.php">Cursos</a>
+                        <a href="menuprincipal.php">Inicio</a>
                     </li>
                     <li>
-                        <a href="editcursos.php">Editar Cursos</a>
+                        <a href="editcursos.php">Cursos</a>
                     </li>
                     <li>
-                        <a href="estudiantes.php">Estudiantes</a>
+                        <a href="editestudiantes.php">Estudiantes</a>
                     </li>
                     <li>
-                        <a href="editestudiantes.php">Editar Estudiantes</a>
+                        <a href="editvoluntarios.php">Voluntarios</a>
                     </li>
                     <li>
-                        <a href="voluntarios.php">Voluntarios</a>
+                        <a href="">Roles</a>
                     </li>
                     <li>
-                        <a href="editvoluntarios.php">Editar Voluntarios</a>
+                        <a href="logout.php">Logout</a>
                     </li>
                 </ul>
             </div>
@@ -131,9 +140,9 @@ print "<div class = 'table-scroll'>";
 		$stmt -> execute();
         $stmt -> bind_result($nombre_clase, $seccion, $horario, $nombre_vol);
 
-        $columnas = array("Nombre del Curso", "Seccion", "Hora", "Nombre del Tutor");
+        $columnas = array(" ", "Nombre del Curso", "Seccion", "Hora", "Nombre del Tutor");
         print "<thead>";
-        for ($i = 0; $i < 4; $i++) {
+        for ($i = 0; $i < 5; $i++) {
             print"<th>";
             print $columnas[$i];
             print"</th>";
@@ -172,6 +181,5 @@ print "</div>";
 
 $coneccion ->close();
 ?>
-<h3><a href="menuprincipal.php">Menu Principal</a></h3>
 </body>
 </html>

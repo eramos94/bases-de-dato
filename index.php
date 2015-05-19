@@ -39,13 +39,16 @@
 
       <form class="form-signin" action="login.php" method="post" enctype="application/x-www-form-urlencoded">
       <center>
-        <h2 class="form-signin-heading">Login:</h2>
+        <h2 class="form-signin-heading">Sistema de Registro de CAUCE</h2>
+        <h3 class="form-signin-heading">Iniciar Sesión:</h2>
         </center>
         <label for="username" class="sr-only">Email</label>
         <input type="email" name = "username" id="username" class="form-control" placeholder="Email" required autofocus>
         <label for="password" class="sr-only">Password</label>
         <input type="password" name = "password" id="password" class="form-control" placeholder="Password" required>
+        <center>
         <button type="submit" class="btn btn-lg btn-primary btn-danger">Login</button>
+        </center>
       </form>
 
     </div> <!-- /container -->

@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Bare - Start Bootstrap Template</title>
+    <title>Inicio</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -18,7 +18,6 @@
     <style>
     body {
         padding-top: 70px;
-        /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
     }
     </style>
 
@@ -50,22 +49,19 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li>
-                        <a href="cursos.php">Cursos</a>
+                        <a href="editcursos.php">Cursos</a>
                     </li>
                     <li>
-                        <a href="editcursos.php">Editar Cursos</a>
+                        <a href="editestudiantes.php">Estudiantes</a>
                     </li>
                     <li>
-                        <a href="estudiantes.php">Estudiantes</a>
+                        <a href="editvoluntarios.php">Voluntarios</a>
                     </li>
                     <li>
-                        <a href="editestudiantes.php">Editar Estudiantes</a>
+                        <a href="">Roles</a>
                     </li>
                     <li>
-                        <a href="voluntarios.php">Voluntarios</a>
-                    </li>
-                    <li>
-                        <a href="editvoluntarios.php">Editar Voluntarios</a>
+                        <a href="logout.php">Logout</a>
                     </li>
                 </ul>
             </div>
