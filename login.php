@@ -15,7 +15,7 @@ $password = "avalles@";
 	$mysqli = new mysqli($server, $user, $password, $dB);; 
 	if($mysqli->errno)
 		
-		header("location: index.html"); 
+		header("location: index.php"); 
 	
 $total = 0;
 $passcauce = $_POST["password"];
@@ -54,14 +54,14 @@ $query = "SELECT COUNT(credenciales.username) AS total FROM credenciales WHERE c
 		if(!setcookie('hash', $hash, 0, '/')) 
 		{
 			session_regenerate_id(true);
-			header("location: index.html"); 
+			header("location: index.php"); 
 			exit();
 		}
 		header("location: menuprincipal.php");
 	}
 	else
 	{
-		header("location: index.html");
+		header("location: index.php");
 	}
 }
 ?>

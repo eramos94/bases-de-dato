@@ -18,6 +18,9 @@
     <!-- Custom styles for this template -->
     <link href="signin.css" rel="stylesheet">
 
+    <!-- Custom styles for this template -->
+    <link href="signin.css" rel="stylesheet">
+
     <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
     <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
     <script src="js/ie-emulation-modes-warning.js"></script>
@@ -42,11 +45,6 @@
         <input type="email" name = "username" id="username" class="form-control" placeholder="Email" required autofocus>
         <label for="password" class="sr-only">Password</label>
         <input type="password" name = "password" id="password" class="form-control" placeholder="Password" required>
-        <div class="checkbox">
-          <label>
-            <input type="checkbox" value="remember-me"> Remember me
-          </label>
-        </div>
         <button type="submit" class="btn btn-lg btn-primary btn-danger">Login</button>
       </form>
 
