@@ -55,9 +55,6 @@
                         <a href="editvoluntarios.php">Voluntarios</a>
                     </li>
                     <li>
-                        <a href="">Roles</a>
-                    </li>
-                    <li>
                         <a href="logout.php">Logout</a>
                     </li>
                 </ul>
@@ -81,6 +78,12 @@ if ($coneccion->connect_errno) {
     echo "Failed to connect to MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
 }
 ?>
+
+<h2 class ="text-nowrap"> <u>Información de Voluntarios</u> </h2>
+<h2 class ="text-justify"> <u>Información de Voluntarios</u> </h2>
+<h2 class ="text-center"> <u>Información de Voluntarios</u> </h2>
+
+
 
   <div class="container">
 
@@ -153,28 +156,79 @@ print "<div class = 'table-scroll'>";
 		}
 		print "</tbody>";
 		print "</table>";
-
-		print "<align='center' bgcolor='#FFFFFF'> <input type='submit' id='delete' name = 'delete' value='Borrar'>";
-		
-		$result = 0;
-		// Check if delete button active, start this 
-		if (isset($_POST['delete'])) {
-			for ($i = 0; $i < 2 ; $i++){
-				$del_id = $checkbox[$i];
-				mysqli_query($coneccion, "DELETE FROM voluntario WHERE id_vol = '$del_id'");
-
-				}
-			}
-			// if successful redirect to delete_multiple.php 
-		if ($result) {
-			echo "<meta http-equiv=\'refresh\' content=\'0;URL=editvoluntarios.php\'>";
-		}
 		$stmt->close();
 		}
 
     print "</div>";
 print "</div>";
+?>
 
+<center>
+<h2> <u> Información de Roles </u> </h2>
+</center>
+    <div class="container">
+
+      <form class="form-signin" method="post" enctype="application/x-www-form-urlencoded">
+        <h3 class="form-signin-heading">Rol que desea añadir: </h3>
+        <label for="nombre_rol" class="sr-only">Nombre del Rol</label>
+        <input type="text" name = "nombre_rol" id="nombre_rol" class="form-control" placeholder="Nombre del Rol" required autofocus>
+        </br>
+        </div>
+        <center>
+        <button type="submit" id ="submit" name = "submit" class="btn btn-lg btn-primary btn-danger">Editar</button>
+        </center>
+      </form>
+
+<?php
+print "</br>";
+print "<font size = '5'> Lista de Roles: </font>";
+print "<br/>";
+print "<font size = '3'> Seleccione la información que desea borrar. </font>";
+print "<br/>";
+
+print "<div class = 'table-scroll'>";
+    print "<div class = 'table-responsive'>"; 
+        print "<table class='table table-bordered'>";
+        $query = "SELECT * FROM roles ORDER BY id_rol";
+
+        if ($stmtrol = $coneccion->prepare($query) ) {
+        $stmtrol -> execute();
+        $stmtrol -> bind_result($id_rol, $nombre_rol);
+
+        $columnas = array("ID del Rol", "Nombre del Rol", " ");
+        print "<thead>";
+        for ($i = 0; $i < 3; $i++) {
+            print"<th>";
+            print $columnas[$i];
+            print"</th>";
+        }
+        print "</thead>";
+        print "<tbody>";
+        while( $stmtrol -> fetch() ) {
+            print"<tr>";
+            printf("<td> %s </td> <td> %s </td> \n", 
+                 $id_rol, $nombre_rol);
+                 ?>
+            <td class="contact-delete">
+            <form action='deleterol.php?name="<?php echo $nombre_rol; ?>"' method="post">
+            <input type="hidden" name="name" value="<?php echo $nombre_rol; ?>">
+            <center>
+            <button type="submit" id ="submit" name = "submit" class="btn btn-sm btn-default">Borrar</button>
+            </center>
+            </form>
+            </td>
+
+            <?php
+            print"</tr>";
+        }
+        print "</tbody>";
+        print "</table>";
+        
+        $stmtrol->close();
+        }
+
+    print "</div>";
+print "</div>";
 $coneccion ->close();
 ?>
 </body>

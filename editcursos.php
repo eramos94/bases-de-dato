@@ -55,9 +55,6 @@
                         <a href="editvoluntarios.php">Voluntarios</a>
                     </li>
                     <li>
-                        <a href="">Roles</a>
-                    </li>
-                    <li>
                         <a href="logout.php">Logout</a>
                     </li>
                 </ul>
@@ -134,7 +131,7 @@ print "<div class = 'table-scroll'>";
 		$query = "SELECT distinct c.nombre_clase, s.seccion, s.horario, v.nombre_vol
         FROM clases c, voluntario v, tutor t, secciones s, ofrece o
         WHERE c.nombre_clase = s.nombre_clase AND s.seccion_id = o.seccion_id AND o.id_vol = t.id_vol
-        AND t.id_vol = v.id_vol";
+        AND t.id_vol = v.id_vol ORDER BY s.seccion_id";
 
 		if ($stmt = $coneccion->prepare($query) ) {
 		$stmt -> execute();

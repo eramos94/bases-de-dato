@@ -58,9 +58,6 @@
                         <a href="editvoluntarios.php">Voluntarios</a>
                     </li>
                     <li>
-                        <a href="">Roles</a>
-                    </li>
-                    <li>
                         <a href="logout.php">Logout</a>
                     </li>
                 </ul>
@@ -77,6 +74,14 @@
             <div class="col-lg-12 text-center">
                 <h1>CAUCE-UPRRP</h1>
                 <p class="lead">Por favor utilize el menu principal para navegar las paginas y hacer sus cambios.</p>
+                <p class="lead">Instrucciones:</p>
+                <ul class="list-unstyled">
+                    <li> <select style="width: 100px;">1) En la página de Cursos podrá ver la información de cursos y editarla. Por favor llene toda la información del formulario. </select> </li>
+                    <li>Contacto: José Alfredo Valles</li>
+                    <li>
+                </ul>
+                <br>
+                <br>
                 <ul class="list-unstyled">
                     <li>Contacto: Edwin Ramos</li>
                     <li>Contacto: José Alfredo Valles</li>

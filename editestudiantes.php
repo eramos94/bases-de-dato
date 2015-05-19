@@ -55,9 +55,6 @@
                         <a href="editvoluntarios.php">Voluntarios</a>
                     </li>
                     <li>
-                        <a href="">Roles</a>
-                    </li>
-                    <li>
                         <a href="logout.php">Logout</a>
                     </li>
                 </ul>
@@ -125,13 +122,13 @@ print "<br/>";
 print "<div class = 'table-scroll'>";
     print "<div class = 'table-responsive'>"; 
         print "<table class='table table-bordered'>";
-		$query = "SELECT * FROM estudiante";
+		$query = "SELECT * FROM estudiante ORDER BY id_estudiante";
 
 		if ($stmt = $coneccion->prepare($query) ) {
 		$stmt -> execute();
 		$stmt -> bind_result($id_estudiante, $nombre_estudiante, $direccion_estu, $telefono_estu, $sexo_estu);
 
-		$columnas = array(" ", "ID del Estudiante", "Nombre del Estudiante", "Direccion", "Telefono", "Sexo");
+		$columnas = array("ID del Estudiante", "Nombre del Estudiante", "Direccion", "Telefono", "Sexo", " ");
 		print "<thead>";
 		for ($i = 0; $i < 6; $i++) {
 			print"<th>";
@@ -142,28 +139,24 @@ print "<div class = 'table-scroll'>";
 		print "<tbody>";
 		while( $stmt -> fetch() ) {
 			print"<tr>";
-			printf(" <td align='center' bgcolor= '#FFFFFF'> <input name='checkbox[]' type='checkbox' id='checkbox[]' value='$id_estudiante'> </td> <td> %s </td> <td> %s </td> <td> %s </td> <td> %s </td> <td> %s </td> \n", 
+			printf("</td> <td> %s </td> <td> %s </td> <td> %s </td> <td> %s </td> <td> %s </td> \n", 
 			 	 $id_estudiante, $nombre_estudiante, $direccion_estu, $telefono_estu, $sexo_estu);
+                 ?>
+            <td class="contact-delete">
+            <form action='deleteestudiante.php?name="<?php echo $id_estudiante; ?>"' method="post">
+            <input type="hidden" name="name" value="<?php echo $id_estudiante; ?>">
+            <center>
+            <button type="submit" id ="submit" name = "submit" class="btn btn-sm btn-default">Borrar</button>
+            </center>
+            </form>
+            </td>
+
+            <?php
 			print"</tr>";
 		}
 		print "</tbody>";
 		print "</table>";
-
-		print "<align='center' bgcolor='#FFFFFF'> <input type='submit' id='delete' name = 'delete' value='Borrar'>";
 		
-		$result = 0;
-		// Check if delete button active, start this 
-		if (isset($_POST['delete'])) {
-			for ($i = 0; $i < 2 ; $i++){
-				$del_id = $checkbox[$i];
-				mysqli_query($coneccion, "DELETE FROM estudiante WHERE id_estudiante = '$del_id'");
-
-				}
-			}
-			// if successful redirect to delete_multiple.php 
-		if ($result) {
-			echo "<meta http-equiv=\'refresh\' content=\'0;URL=editvoluntarios.php\'>";
-		}
 		$stmt->close();
 		}
 
@@ -172,5 +165,6 @@ print "</div>";
 
 $coneccion ->close();
 ?>
+    </div> <!-- /container -->
 </body>
 </html>
