@@ -121,25 +121,29 @@ print "<br/>";
 print "<div class = 'table-scroll'>";
     print "<div class = 'table-responsive'>"; 
         print "<table class='table table-bordered'>";
-		$query = "SELECT * FROM clases";
+
+		$query = "SELECT distinct c.nombre_clase, s.seccion, s.horario, v.nombre_vol
+        FROM clases c, voluntario v, tutor t, secciones s, ofrece o
+        WHERE c.nombre_clase = s.nombre_clase AND s.seccion_id = o.seccion_id AND o.id_vol = t.id_vol
+        AND t.id_vol = v.id_vol";
 
 		if ($stmt = $coneccion->prepare($query) ) {
 		$stmt -> execute();
-		$stmt -> bind_result($nombre_clase, $horario, $semestre, $id_vol, $seccion, $class_id);
+        $stmt -> bind_result($nombre_clase, $seccion, $horario, $nombre_vol);
 
-		$columnas = array("#", "ID del Curso", "Nombre del Curso", "Seccion", "ID del Tutor", "Semestre", "Horario");
-		print "<thead>";
-		for ($i = 0; $i < 7; $i++) {
-			print"<th>";
-			print $columnas[$i];
-			print"</th>";
-		}
+        $columnas = array("Nombre del Curso", "Seccion", "Hora", "Nombre del Tutor");
+        print "<thead>";
+        for ($i = 0; $i < 4; $i++) {
+            print"<th>";
+            print $columnas[$i];
+            print"</th>";
+        }
 		print "</thead>";
 		print "<tbody>";
 		while( $stmt -> fetch() ) {
 			print"<tr>";
-			printf(" <td align='center' bgcolor= '#FFFFFF'> <input name='checkbox[]' type='checkbox' id='checkbox[]' value='$class_id'> </td> <td> %s </td> <td> %s </td> <td> %s </td> <td> %s </td> <td> %s </td> <td> %s </td> \n", 
-			 	 $class_id, $nombre_clase, $seccion, $id_vol, $semestre, $horario);
+			printf(" <td align='center' bgcolor= '#FFFFFF'> <input name='checkbox[]' type='checkbox' id='checkbox[]' value='$nombre_clase'> </td> <td> %s </td> <td> %s </td> <td> %s </td> <td> %s </td>\n", 
+			 	$nombre_clase, $seccion, $horario, $nombre_vol);
 			print"</tr>";
 		}
 		print "</tbody>";

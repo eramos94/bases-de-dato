@@ -50,6 +50,10 @@ CREATE TABLE credenciales
 	(username VARCHAR(100), password VARCHAR(100),
 	PRIMARY KEY (username, password), UNIQUE (username) ) ENGINE = InnoDB;
 
+INSERT INTO credenciales (username, password) VALUES
+	('fifo@cauce.uprrp.edu', 'fifo123'),
+	('alyssa@cauce.uprrp.edu', 'alyssa123');
+
 INSERT INTO voluntario (nombre_vol, email, telefono_vol, direccion_vol, sexo_vol) VALUES
 	('Fifo Copjiri', 'fifo@cauce.uprrp.edu', '787-555-5555', 'Apartamento #15, Calle West, Apartamentito Lindo', 'M'),
 	('Mt. Fuji', 'fuji@cauce.uprrp.edu','787-407-3456', 'J-16, Calle 15, Japon', 'M'),
@@ -66,10 +70,6 @@ INSERT INTO notutor (id_vol) VALUES
 	(3),
 	(4),
 	(1);
-
-INSERT INTO credenciales (username, password) VALUES
-	('fifo@cauce.uprrp.edu', 'fifo123'),
-	('alyssa@cauce.uprrp.edu', 'alyssa123');
 
 INSERT INTO clases (nombre_clase) VALUES
 	('Computadoras 101'),
@@ -94,10 +94,10 @@ INSERT INTO trabajo (id_vol, id_rol) VALUES
 	(4, 3),
 	(3, 1);
 
-INSERT INTO ofrece (id_vol, class_id) VALUES
+INSERT INTO ofrece (id_vol, seccion_id) VALUES
 	(1, 1),
-	(1, 2),
-	(5, 3);
+	(1, 3),
+	(5, 4);
 
 INSERT INTO matriculados (id_estudiante, ofrece_id) VALUES
 	(1, 1),
@@ -106,20 +106,20 @@ INSERT INTO matriculados (id_estudiante, ofrece_id) VALUES
 	(3, 2),
 	(2, 2);
 
-INSERT INTO secciones (class_id, seccion, semestre, horario) VALUES
-	(1, '001', 'B42', '10:00am'),
-	(1, '002', 'B42', '10:00am'),
-	(2, '001', 'B32', '1:00pm'),
-	(3, '001', 'B41', '9:00am');
+INSERT INTO secciones (nombre_clase, seccion, semestre, horario) VALUES
+	('Computadoras 101', '001', 'B42', '10:00am'),
+	('Computadoras 101', '002', 'B42', '10:00am'),
+	('Computadoras Avanzadas', '001', 'B32', '1:00pm'),
+	('Huerto', '001', 'B41', '9:00am');
 
 
 #--------------------------------------------------------------------------
 # Displaying Courses:
 
-SELECT c.class_id, c.nombre_clase, v.nombre_vol, s.horario, s.semestre, s.seccion
+SELECT c.nombre_clase, s.seccion, s.horario, v.nombre_vol
 	FROM clases c, voluntario v, tutor t, secciones s, ofrece o
-	WHERE s.class_id = c.class_id AND c.class_id = o.class_id AND o.id_vol = v.id_vol
-	AND v.id_vol = t.id_vol;
+	WHERE c.nombre_clase = s.nombre_clase AND s.seccion_id = o.seccion_id AND o.id_vol = t.id_vol
+	AND t.id_vol = v.id_vol;
 
 #--------------------------------------------------------------------------
 # Displaying Voluntary Staff:

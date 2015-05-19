@@ -77,18 +77,18 @@ print "<div class = 'table-scroll'>";
     print "<div class = 'table-responsive'>"; 
         print "<table class='table table-bordered'>";
 
-		$query = "SELECT distinct c.nombre_clase, c.horario, c.semestre, c.id_vol, c.seccion, c.class_id
-			FROM clases c, trabajo t, voluntario v 
-			WHERE c.id_vol = v.id_vol AND c.semestre = t.semestre
-			AND v.id_vol = t.id_vol ORDER BY c.class_id;";
+		$query = "SELECT distinct c.nombre_clase, s.seccion, s.horario, v.nombre_vol
+        FROM clases c, voluntario v, tutor t, secciones s, ofrece o
+        WHERE c.nombre_clase = s.nombre_clase AND s.seccion_id = o.seccion_id AND o.id_vol = t.id_vol
+        AND t.id_vol = v.id_vol;";
 
 		if ($stmt = $coneccion->prepare($query) ) {
 		$stmt -> execute();
-		$stmt -> bind_result($nombre_clase, $horario, $semestre, $id_vol, $seccion, $codigo);
+		$stmt -> bind_result($nombre_clase, $seccion, $horario, $nombre_vol);
 
-		$columnas = array("Codigo del Curso", "Nombre del Curso", "Seccion", "Semestre", "Hora", "ID del Tutor");
+		$columnas = array("Nombre del Curso", "Seccion", "Hora", "Nombre del Tutor");
 		print "<thead>";
-		for ($i = 0; $i < 6; $i++) {
+		for ($i = 0; $i < 4; $i++) {
 			print"<th>";
 			print $columnas[$i];
 			print"</th>";
@@ -97,8 +97,8 @@ print "<div class = 'table-scroll'>";
 		print "<tbody>";
 		while( $stmt -> fetch() ) {
 			print"<tr>";
-			printf("<td> %s </td> <td> %s </td> <td> %s </td> <td> %s </td> <td> %s </td> <td> %s </td> \n", 
-			  	$codigo, $nombre_clase, $seccion, $semestre, $horario, $id_vol);
+			printf("<td> %s </td> <td> %s </td> <td> %s </td> <td> %s </td> \n", 
+			  	$nombre_clase, $seccion, $horario, $nombre_vol);
 			print"</tr>";
 		}
 		print "</tbody>";
